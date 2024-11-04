@@ -37,8 +37,8 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the repository**
 
-    `git clone https://github.com/udacity/backend-dev-C1-starter.git `
-    `cd project/solution`
+    ```git clone https://github.com/udacity/backend-dev-C1-starter.git ```
+    ```cd project/starter```
 
 2. **Install Go dependencies** 
 
