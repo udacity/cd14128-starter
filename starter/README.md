@@ -236,11 +236,11 @@ Note: When running in production mode, ensure that your main.go does not perform
 ### Step 3: Implement the GetPost Handler
 File: `controllers/post_controller.go`
 
-Task: Complete the `GetPost` function to retrieve all posts from the database.
+Task: Complete the `GetPost` function to retrieves a specific post by ID
 
 Instructions:
 
-- Query the pages table to retrieve all records.
+- Query the posts table to retrieve a specific post by ID.
 - If there’s an error, return a `500` status with an error message.
 - If successful, return a `200` status and the list of pages as JSON.
 
