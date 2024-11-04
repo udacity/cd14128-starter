@@ -156,7 +156,7 @@ Instructions:
      - Drop tables in correct order (post_media before posts)
      - Ensure clean removal of all related objects
 
-3. Migration Best Practices:
+ Migration Best Practices:
    - Use appropriate data types (SERIAL for IDs, VARCHAR with limits, TEXT for content)
    - Include NOT NULL constraints where needed
    - Add timestamps with timezone support
