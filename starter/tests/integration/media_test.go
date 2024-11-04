@@ -27,11 +27,13 @@ Each test should:
 */
 
 func TestMediaIntegration(t *testing.T) {
+	//TODO: Implement TestMediaIntegration
     // STEP 1: Clear Database
     // - Clear all tables before starting tests
 	clearTables()
 
 	t.Run("Create Media", func(t *testing.T) {
+		//TODO: Implement test logic
         // STEP 1: Prepare Test Data
         // - Create JSON body with:
         //   * URL (e.g., "http://example.com/test.jpg")
@@ -74,7 +76,7 @@ func TestMediaIntegration(t *testing.T) {
 	})
 
     t.Run("Get All Media", func(t *testing.T) {
-		//TODO: Add test logic
+		//TODO: Implement test logic
         // STEP 1: Setup Test Data
         // - Create test media entries if needed
         

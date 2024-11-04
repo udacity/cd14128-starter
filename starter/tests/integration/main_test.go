@@ -28,6 +28,7 @@ Key Components:
 */
 
 func TestMain(m *testing.M) {
+	//TODO: Implement TestMain
     // STEP 1: Environment Setup
     // - Call setup() function
     
@@ -40,6 +41,7 @@ func TestMain(m *testing.M) {
 }
 
 func setup() {
+	//TODO: Implement setup
     // STEP 1: Configure Gin
     // - Set Gin to test mode for integration testing
     
@@ -62,6 +64,7 @@ func setup() {
 }
 
 func cleanup() {
+	//TODO: Implement cleanup
     // STEP 1: Database Cleanup
     // - Get underlying SQL database
     // - Drop all tables in correct order:
@@ -74,6 +77,7 @@ func cleanup() {
 }
 
 func clearTables() {
+	//TODO: Implement clearTables
     // STEP 1: Data Cleanup
     // - Delete all data from tables in correct order:
     //   1. Junction tables first
