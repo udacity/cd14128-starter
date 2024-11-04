@@ -43,17 +43,21 @@ Before you begin, ensure you have the following installed:
     ```
 2. **Install Go dependencies** 
 
-    `go mod download`
+    ```bash
+    go mod download
+    ```
 
 3. **Set Up Environment Variables**
 
     Create a `.env` file. In the project root directory, create a `.env` file to store your development environment variables:
 
-    `cp .env.example .env`
+    ```bash
+    cp .env.example .env
+    ```
 
     Open the `.env` file and replace the placeholder values with your actual database credentials:
 
-    ```
+    ```bash
     DB_HOST=localhost
     DB_PORT=5432
     DB_USER=your_db_user
@@ -73,16 +77,20 @@ You can set up your PostgreSQL database using either the PostgreSQL CLI or pgAdm
 
 1.  Start PostgreSQL service using the following commands:
 
-    `brew install postgresql`
-    `brew services start postgresql`
+    ```bash
+    brew install postgresql
+    brew services start postgresql
+    ```
 
 2. Access PostgreSQL CLI by running the following command:
 
-    `psql -U postgres`
+    ```bash
+    psql -U postgres
+    ```
 
 3.  Create a database called `your_db_name` and user called `your_db_user`.
    
-    ```
+    ```bash
     CREATE DATABASE your_db_name;
     CREATE USER your_db_user WITH ENCRYPTED PASSWORD 'your_db_password';
     GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;
@@ -90,7 +98,9 @@ You can set up your PostgreSQL database using either the PostgreSQL CLI or pgAdm
 
 4.  Exit PostgreSQL CLI using the following command:
 
-    `\q`
+    ```bash
+    \q
+    ```
 
 **Option 2. Using pgAdmin 4**
 
