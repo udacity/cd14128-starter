@@ -1,28 +1,31 @@
-# CMS Backend
+# CMS Backend Project
 
-This README guides you through setting up and completing a Content Management System (CMS) backend API built with Go (Golang), the Gin web framework, and GORM for OR and PostgreSQL. This project covers essential backend skills, including CRUD operations, database migrations, testing, and deploying environment-specific configurations.
+Content management systems (CMS) are important for managing and delivering content across websites and applications. As a backend developer, being able to build a robust CMS backend is a highly valuable skill. In this project, you will create a CMS backend API using Go, Gin, and PostgreSQL, simulating real-world tasks you might encounter in your career. This project covers essential backend skills, including CRUD operations, database migrations, testing, and deploying environment-specific configurations.   
 
 ## Project Objectives
 
-The objective of this project is to build a fully functional backend API with CRUD capabilities for managing pages, posts, and media content. Learners will:
+The objective of this project is to build a fully functional backend API with CRUD capabilities for managing pages, posts, and media content in a content management system (CMS). By completing this project, you will:
 
-- Complete the CRUD handlers in the `Page`, `Post`, and `Media` controllers.
-- Implement database operations using GORM.
-- Configure environment variables for different environments.
-- Add tests to verify functionality, including unit and integration tests.
+- Apply Go programming skills to build a RESTful API.
+- Utilize the Gin web framework for efficient routing and middleware management.
+- Implement database interactions using GORM with PostgreSQL.
+- Manage database schema changes using migrations.
+- Write unit and integration tests to ensure code quality and reliability.
+- Configure environment variables for different deployment environments.
 
-The final deliverable is a backend API with comprehensive test coverage that follows best practices in backend development.
+The final deliverable is a backend API with comprehensive test coverage that follows best practices in backend development and demonstrates your ability to:
 
-## Features
+- Build scalable backend services using Go, one of the most in-demand programming languages in the industry.
+- Work with relational databases and ORMs, a critical skill for backend developers.
+- Implement RESTful APIs, which are foundational to modern web development.
+- Write robust tests, showcasing your commitment to code quality and reliability.
+- Manage environment configurations and understand the importance of secure credential handling.
 
-- RESTful API endpoints for managing pages, posts, and media.
-- Database schema management with migrations using golang-migrate.
-- Environment-specific configurations for development and production.
-- GORM's AutoMigrate used in development for rapid schema updates.
-- Secure handling of environment variables.
-- Middleware setup with Gin for logging and recovery.
+## Getting Started
 
-## Prerequisites
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
 
 - [Go 1.16 or higher](https://go.dev/)
 - [PostgreSQL](https://www.postgresql.org/)
@@ -30,7 +33,7 @@ The final deliverable is a backend API with comprehensive test coverage that fol
 - [golang-migrate](https://github.com/golang-migrate)
 - [pgAdmin 4](https://www.pgadmin.org/download/) (Optional)
 
-## Installation
+### Installation steps
 
 1. **Clone the repository**
 
@@ -41,61 +44,54 @@ The final deliverable is a backend API with comprehensive test coverage that fol
 
     `go mod download`
 
-## Environment setup
+3. **Set Up Environment Variables**
 
-This section guides you through setting up the environment variables needed for development and production environments. Properly managing these configurations ensures that sensitive information is protected and makes switching between environments seamless.
+    Create a `.env` file. In the project root directory, create a `.env` file to store your development environment variables:
 
-### Development environment
+    `cp .env.example .env`
 
-1. Create a `.env` file. In the project root directory, create a `.env` file to store your development environment variables:
+    Open the `.env` file and replace the placeholder values with your actual database credentials:
 
-`cp .env.example .env`
+    ```
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_USER=your_db_user
+    DB_PASSWORD=your_db_password
+    DB_NAME=your_db_name
+    ENV=development
+    ```
 
-```
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
-DB_NAME=your_db_name
-ENV=development
-```
+    Note: Ensure that the .env file is included in your .gitignore to prevent sensitive information from being committed to version control. Add `.env` to `.gitignore`.
 
-2. Replace `your_db_user`, `your_db_password`, and `your_db_name` with your PostgreSQL development database credentials.
 
-3. Add `.env` to `.gitignore`. Ensure that your `.env` file is not committed to version control by adding it to your `.gitignore` file.
-
-### Production environment
-
-For production, set ENV=production in the environment variables. This will ensure that golang-migrate is used for migrations, and database credentials are set to the production database instance.
-
-## Create Databases
+### Create Databases
 
 You can set up your PostgreSQL database using either the PostgreSQL CLI or pgAdmin 4.
 
-### Using PostgreSQL CLI
+**Option 1. Using PostgreSQL CLI**
 
 1.  Start PostgreSQL service using the following commands:
 
-`brew install postgresql`
-`brew services start postgresql`
+    `brew install postgresql`
+    `brew services start postgresql`
 
 2. Access PostgreSQL CLI by running the following command:
 
-`psql -U postgres`
+    `psql -U postgres`
 
 3.  Create a database called `your_db_name` and user called `your_db_user`.
    
-```
-CREATE DATABASE your_db_name;
-CREATE USER your_db_user WITH ENCRYPTED PASSWORD 'your_db_password';
-GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;
-```
+    ```
+    CREATE DATABASE your_db_name;
+    CREATE USER your_db_user WITH ENCRYPTED PASSWORD 'your_db_password';
+    GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;
+    ```
 
-1.  Exit PostgreSQL CLI using the following command:
+4.  Exit PostgreSQL CLI using the following command:
 
-`\q`
+    `\q`
 
-### Using pgAdmin 4
+**Option 2. Using pgAdmin 4**
 
 pgAdmin 4 is a web-based GUI tool that simplifies database management. Follow these steps if you prefer managing the database via a GUI.
 
@@ -120,120 +116,7 @@ pgAdmin 4 is a web-based GUI tool that simplifies database management. Follow th
 1. After creating the user, ensure they have the necessary privileges on your database. You can do this by running SQL queries in pgAdmin's Query Tool:
 `GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;`
 
-## Migrations
 
-This section explains how to manage database migrations, which are essential for schema management and version control.
-
-### Using golang-migrate for Production Migrations
-
-golang-migrate is used to manage database schema changes in a production environment.
-
-1. Install `golang-migrate`. If you're using macOS with Homebrew run the following command in Terminal: 
-` brew install golang-migrate ` 
-or follow installation instructions from in the [GoLang repo](https://github.com/golang-migrate/migrate).
-
-2. Run migrations using the following command:
-
-` migrate -database postgres://your_db_user:your_db_password@host:port/your_db_name?sslmode=disable -path ./migrations up `
-
-### AutoMigrate in Development
-
-During development, GORM’s AutoMigrate feature can be used to automatically update the schema based on your models, which is enabled in main.go when ENV=development.
-
-## Running the application
-
-    1. Ensure PostgreSQL is running
-    ` pg_ctl -D /usr/local/var/postgres start  # macOS example `
-
-    2. Run the application
-
-    ` go run main.go `
-
-## API Documentation
-
-The API documentation provides an overview of the available endpoints for the CMS Backend. The CMS Backend API includes endpoints for managing pages, posts, and media content.
-
-Base URL: http://localhost:8080/api/v1
-
-Endpoints
- - Pages
-
-        `GET /pages`    - Get all pages
-        `GET /pages/:id` - Get a single page by ID
-        `POST /pages` - Create a new page
-        `PUT /pages/:id` - Update a page
-        `DELETE /pages/:id` - Delete a page
-
-- Posts
-
-        `GET /posts` - Get all posts
-        `GET /posts/:id` - Get a single post by ID
-        `POST /posts` - Create a new post
-        `PUT /posts/:id` - Update a post
-        `DELETE /posts/:id` - Delete a post
-
-- Media
-
-        `GET /media` - Get all media
-        `GET /media/:id` - Get a single media by ID
-        `POST /media` - Create a new media
-        `PUT /media/:id` - Update a media
-        `DELETE /media/:id` - Delete a media
-
-## Testing
-
-This section outlines the process for running unit and integration tests. Comprehensive testing is essential to verify functionality and reliability of the CMS backend API.
-
-### Unit Testing
-
-#### Overview
-
-Unit tests verify the functionality of individual components, such as controllers and services, in isolation. The tests use mocks to simulate database interactions and focus on request/response handling and error handling.
-
- Our unit tests focus on:
-- Controllers (Media, Post, Page)
-- Request/Response handling
-- Database interactions (using mocks)
-- Error handling
-
-#### Running Unit Tests
-```bash
-# Run all unit tests with verbose output
-go test ./controllers -v
-
-# Run specific controller tests
-go test ./controllers -run TestGetMedia -v
-go test ./controllers -run TestCreatePost -v
-go test ./controllers -run TestUpdatePage -v
-
-# Run tests with coverage
-go test ./controllers -cover
-```
-
-#### Unit Test Coverage
-
-Below are the unit test cases included for each controller, which validate CRUD operations and error handling:
-
-#### Media Controller Tests
-- TestGetMedia - List all media
-- TestGetMediaByID - Get single media
-- TestCreateMedia - Create new media
-- TestDeleteMedia - Delete media
-
-#### Post Controller Tests
-- TestGetPosts - List all posts
-- TestGetPostsWithFilters - Filter posts by title/author
-- TestGetPost - Get single post
-- TestCreatePost - Create new post
-- TestUpdatePost - Update existing post
-- TestDeletePost - Delete post
-
-#### Page Controller Tests
-- TestGetPages - List all pages
-- TestGetPage - Get single page
-- TestCreatePage - Create new page
-- TestUpdatePage - Update existing page
-- TestDeletePage - Delete page
 
 ### Integration Testing
 
@@ -270,7 +153,277 @@ TEST_DB_NAME=cms_test
 TEST_DB_PORT=5432
 ```
 
-#### Running Integration Tests
+## Step-by-Step Implementation Guide
+In the following step-by-step guide, we'll walk you through building your CMS backend. You'll learn how to define your models, create database migrations, implement CRUD operations, set up routing, and write tests.
+
+### Step 1: Define the Models
+Files: `models/page.go`, `models/post.go`, and `models/media.go`
+
+Task: Define data structures for `Page` and `Post`.
+
+Instructions:
+
+- Open each model file and define struct fields with appropriate GORM tags, as described in // TODO comments.
+- Ensure fields like `ID`, `Title`, `Content`, `Slug`, `CreatedAt`, and `UpdatedAt` are included in each model.
+
+### Step 2: Create Migrations for Models
+
+Files: `migrations/000001_create_media_table.up.sql`, `migrations/000001_create_media_table.down.sql`, `migrations/000002_create_posts_table.up.sql`, `migrations/000002_create_posts_table.down.sql`
+
+Task: Create migrations for `Media` and `Post` models.
+
+Instructions:
+
+1. Create the media table migration files:
+   - Create `migrations/000001_create_media_table.up.sql`:
+     - Define table with columns: id, url, type, created_at, updated_at
+     - Add appropriate data types and constraints
+     - Consider adding indexes for performance
+   - Create `migrations/000001_create_media_table.down.sql`:
+     - Include cleanup logic to remove the table
+     - Drop any created indexes
+
+2. Create the posts table migration files:
+   - Create `migrations/000002_create_posts_table.up.sql`:
+     - Define posts table with columns: id, title, content, author, created_at, updated_at
+     - Create post_media junction table for many-to-many relationship
+     - Add foreign key constraints with cascade delete
+   - Create `migrations/000002_create_posts_table.down.sql`:
+     - Drop tables in correct order (post_media before posts)
+     - Ensure clean removal of all related objects
+
+3. Migration Best Practices:
+   - Use appropriate data types (SERIAL for IDs, VARCHAR with limits, TEXT for content)
+   - Include NOT NULL constraints where needed
+   - Add timestamps with timezone support
+   - Consider adding indexes for frequently queried columns
+   - Ensure down migrations can cleanly reverse all changes
+
+Example: See `/migrations/000001_create_pages_table.down.sql` and `/migrations/000002_create_media_table.down.sql` for a complete implementation.
+
+### Step 2: Run Initial Database Migrations
+Task: Apply the initial database schema to your PostgreSQL database.
+
+Instructions:
+
+Option 1: Using GORM AutoMigrate (Development Environment)
+
+If you're in the development environment (ENV=development), you can use GORM's AutoMigrate feature to automatically migrate your database schema based on your models.
+
+1. Run the Application to AutoMigrate:
+
+` go run main.go `
+
+2. Verify the Tables:
+
+Use a PostgreSQL client or GUI tool to check that the pages, posts, and media tables have been created.
+Note: Ensure that your main.go includes the AutoMigrate calls:
+
+```go
+if env == "development" {
+    log.Println("Running AutoMigrate...")
+    if err := db.AutoMigrate(&models.Page{}, &models.Post{}, &models.Media{}); err != nil {
+        log.Fatalf("Failed to automigrate database: %v", err)
+    }
+    }
+```
+
+Option 2: Using golang-migrate (Production Environment)
+
+For a more controlled migration process, especially in production environments (ENV=production), use golang-migrate to apply migrations from SQL files.
+
+1. Install golang-migrate:
+
+If you haven't installed it yet, follow the installation instructions from the golang-migrate GitHub repository.
+Prepare Migration Files:
+
+Ensure your migration SQL files are correctly set up in the ./migrations directory.
+Example migration files:
+000001_create_pages_table.up.sql
+000001_create_pages_table.down.sql
+Run Migrations:
+
+bash
+Copy code
+migrate -database "postgres://your_db_user:your_db_password@localhost:5432/your_db_name?sslmode=disable" -path ./migrations up
+Replace your_db_user, your_db_password, and your_db_name with your database credentials.
+Verify the Migrations:
+
+Use a PostgreSQL client or GUI tool to confirm that the tables have been created according to your migration files.
+Note: When running in production mode, ensure that your main.go does not perform AutoMigrate to prevent unintended schema changes.
+
+### Step 3: Implement the GetPost Handler
+File: `controllers/post_controller.go`
+
+Task: Complete the `GetPost` function to retrieve all posts from the database.
+
+Instructions:
+
+- Query the pages table to retrieve all records.
+- If there’s an error, return a `500` status with an error message.
+- If successful, return a `200` status and the list of pages as JSON.
+
+Example: See `GetPost` function in `controllers/post_controller.go` for a complete implementation.
+
+### Step 4: Implement the CreatePost Handler
+File: `controllers/post_controller.go`
+
+Task: Complete the CreatePost function to create a new post.
+
+Instructions:
+
+- Bind JSON data from the request to the page struct.
+- Validate required fields (Title and Content).
+- Insert the new post into the database.
+- Return a 201 status and the created post as JSON.
+
+### Step 5: Implement UpdatePost and DeletePost Handlers
+File: `controllers/post_controller.go`
+
+Task: Implement `UpdatePost` and `DeletePost` functions.
+
+Instructions:
+
+- `UpdatePage`:
+    - Bind the update data to the `post` struct.
+    - Find the post by ID and update its fields.
+- `DeletePost`:
+    - Find the post by ID and delete it from the database.
+    - If not found, return a `404` status. 
+
+### Step 6: Implement the Page Controller
+
+- `page_controller.go`: repeat the CRUD implementation as outlined in `post_controller.go`.
+
+### Step 7: Implement the Media Controller
+- `media_controller.go`: repeat the CRUD implementation as outlined in `page_controller.go`.
+
+### Step 8: Implement the Routes
+File: `routes/routes.go`
+
+Task: Define the routes for the API using Gin and link them to the handlers.
+
+Instructions:
+
+- Add database middleware that: 
+    - Stores the db instance in the context using a `db` key
+    - Calls `Next()` to continue to the next handler
+- Create API version group that:
+    - Uses `router.Group()` to create a new route group
+    - Sets the group prefix to `/api/v1`
+    - Stores the group in a variable for adding routes
+- Within the api group, use `router.GET()`, `router.POST()`, `router.PUT()`, and `router.DELETE()` methods to define routes for pages, posts, and media.
+- Mount the routes under the `/api/v1` prefix.
+
+### Step 9: Run the Application and Test Endpoints
+Task: Start the server and test the API endpoints manually.
+
+Instructions:
+
+Run the Application:
+
+` go run main.go `
+Test Endpoints Using cURL or Postman:
+
+Example: Test the GetPosts endpoint.
+
+` curl -X GET http://localhost:8080/api/v1/posts `
+Create a New Post:
+
+` curl -X POST http://localhost:8080/api/v1/posts \
+  -H "Content-Type: application/json" \
+  -d '{"title": "First Post", "content": "This is the content of the first post.", "author": "Admin"}' `
+Verify Responses:
+
+- Ensure that the API responds with the correct status codes and data.
+- Check the database to verify that data is being saved correctly.
+
+### Step 10: Write Unit Tests for Page Controller
+
+Unit tests verify the functionality of individual components, such as controllers and services, in isolation. The tests use mocks to simulate database interactions and focus on request/response handling and error handling.
+
+ Our unit tests focus on:
+- Controllers (Media, Post, Page)
+- Request/Response handling
+- Database interactions (using mocks)
+- Error handling
+
+Files: `tests/controllers/page_controller_test.go`
+
+Task: Write unit tests for each CRUD operation in `page_controller.go`.
+
+Instructions:
+- Use `httptest` to simulate HTTP requests and `testify` for assertions.
+- Mock database calls to ensure tests are isolated from real data.
+
+Example: See `TestGetPages` function in `controllers/page_controller_test.go` for a complete implementation.
+
+### Step 11: Write Unit Tests for Post Controller
+Files: `tests/controllers/post_controller_test.go`  
+
+Task: Write unit tests for each CRUD operation in `post_controller.go`.
+
+Instructions:
+- Use `httptest` to simulate HTTP requests and `testify` for assertions.
+- Mock database calls to ensure tests are isolated from real data.
+
+### Step 12: Write Unit Tests for Media Controller
+Files: `tests/controllers/media_controller_test.go`  
+
+Task: Write unit tests for each CRUD operation in `media_controller.go`.
+
+Instructions:
+- Use `httptest` to simulate HTTP requests and `testify` for assertions.
+- Mock database calls to ensure tests are isolated from real data.
+
+#### Step 13: Run Unit Tests
+Command:
+
+```bash
+# Run all unit tests with verbose output
+go test ./controllers -v
+
+# Run specific controller tests
+go test ./controllers -run TestGetMedia -v
+go test ./controllers -run TestCreatePost -v
+go test ./controllers -run TestUpdatePage -v
+
+# Run tests with coverage
+go test ./controllers -cover
+``` 
+
+
+Instructions:
+
+This command runs all unit tests in the tests/unit directory.
+Ensure your unit tests cover all CRUD operations and handle both success and error cases.
+Use `go test -cover` to check test coverage.
+
+### Step 14: Write Integration Tests
+
+Integration tests verify the functionality of the API as a whole, including interactions between components and the database.
+
+Files: `tests/integration/main_test.go`, `post_test.go`, `media_test.go`
+
+Task: Write integration tests to validate the end-to-end functionality of each API endpoint.
+
+Instructions:
+- Implement the `setup()` and `cleanup()` functions to prepare the test environment and clean up after tests in `main_test.go`.
+- Implement the `"Get All Media"` test case in `media_test.go`.
+- Implement the `"Create Post with Media"` test case in `post_test.go`.
+- Implement the `"Get Posts with Filter"` test case in `post_test.go`.
+
+Guidelines:
+- Integration tests should use a test database to validate that CRUD operations affect data as expected.
+- Each test should cover full CRUD operations to ensure the endpoints interact with the database correctly.
+
+### Step 15: Running Integration Tests
+Prerequisites:
+
+- Set up a test database (e.g., cms_test).
+- Update your .env.test file with test database credentials.
+
+Command:
 
 To run all tests, run the following command:
 
@@ -289,204 +442,35 @@ go test ./tests/integration -run TestMediaIntegration -v
 go test ./tests/integration -run TestPostIntegration -v
 ```
 
-
-#### Integration Test Coverage
-
-Integration tests focus on end-to-end functionality, verifying that the API behaves correctly under various conditions:
-
-#### Media Integration Tests
-```go
-TestMediaIntegration
-├── Create Media
-│   └── Tests media creation and validation of created attributes.
-└── Get All Media
-    └── Verifies retrieval of all media assets.
-```
-
-#### Post Integration Tests
-```go
-TestPostIntegration
-├── Create Post with Media
-│   └── Tests post creation with associated media.
-└── Get Posts with Filter
-    └──  Filters posts by title or author and verifies results.
-```
-
-## Makefile Commands
-
-The Makefile automates common tasks, such as running tests and managing the database.
-
-```makefile
-# Available commands:
-make test              # Run all tests
-make test-unit         # Run only unit tests
-make test-integration  # Run only integration tests
-make create-test-db    # Create test database
-```
-
-## Troubleshooting
-
-This section addresses common issues encountered when setting up or running the CMS backend API.
-
-### Common Issues
-
-1. Unit Test Failures
-```bash
-# Issue: Mock expectations not met
-Error: mock expectation not met [file.go:123]
-Solution: Check mock setup in test file
-```
-
-2. Integration Test Database Issues
-```bash
-# Issue: Cannot connect to database
-Error: dial tcp [::1]:5432: connect: connection refused
-Solution: Ensure PostgreSQL is running
-
-# Issue: Database permissions
-Error: permission denied for database "cms_test"
-Solution: Run: GRANT ALL PRIVILEGES ON DATABASE cms_test TO postgres;
-```
-
-### Test Structure
-
-Organizing tests by functionality ensures clarity and ease of maintenance. The following structure is used:
-
-```
-├── controllers/
-│   ├── media_controller_test.go
-│   ├── page_controller_test.go
-│   └── post_controller_test.go
-└── tests/
-    └── integration/
-        ├── main_test.go
-        ├── media_test.go
-        └── post_test.go
-```
-
-Each test suite within controllers/ and integration/ includes individual tests covering CRUD operations and validations, contributing to a well-tested and robust API backend.
-
-## Step-by-Step Implementation Guide
-Each section below provides guidance for implementing tasks related to CRUD functionality, models, controllers, routing, and testing.
-
-### Step 1: Define the Models
-Files: `models/page.go`, `models/post.go`, and `models/media.go`
-
-Task: Define data structures for `Page` and `Post`.
-
 Instructions:
 
-- Open each model file and define struct fields with appropriate GORM tags, as described in // TODO comments.
-- Ensure fields like `ID`, `Title`, `Content`, `Slug`, `CreatedAt`, and `UpdatedAt` are included in each model.
+This command runs all integration tests, which test your application end-to-end.
+Ensure that the test database is clean before running tests to avoid data contamination.
+Use `make create-test-db` to set up the test database if needed.
 
-Example: See `models/media.go` for a complete implementation.
+### Troubleshooting
+If you encounter issues while setting up or running the application, consider the following tips:
 
-### Step 2: Implement the GetPost Handler
-File: `controllers/post_controller.go`
+**Cannot Connect to Database:**
 
-Task: Complete the `GetPost` function to retrieve all posts from the database.
+- Ensure that PostgreSQL is running.
+- Verify that your database credentials in the .env file are correct.
+- Check that the database exists and that the user has appropriate permissions.
 
-Instructions:
+**Migrations Fail:**
 
-- Query the pages table to retrieve all records.
-- If there’s an error, return a `500` status with an error message.
-- If successful, return a `200` status and the list of pages as JSON.
+- Ensure that the migration files are correctly formatted.
+- Check that you have the correct version of golang-migrate installed.
+- Review error messages for specific details.
 
-Example: See `GetPost` function in `controllers/post_controller.go` for a complete implementation.
+**Tests Fail:**
 
-### Step 3: Implement the CreatePost Handler
-File: `controllers/post_controller.go`
+- Ensure that your test database is properly set up.
+- Check for issues in your test setup code.
+- Review error messages and stack traces to identify the problem.
 
-Task: Complete the CreatePost function to create a new post.
+**Server Crashes or Does Not Start:**
 
-Instructions:
-
-- Bind JSON data from the request to the page struct.
-- Validate required fields (Title and Content).
-- Insert the new post into the database.
-- Return a 201 status and the created post as JSON.
-
-### Step 4: Implement UpdatePost and DeletePost Handlers
-File: `controllers/post_controller.go`
-
-Task: Implement `UpdatePost` and `DeletePost` functions.
-
-Instructions:
-
-- `UpdatePage`:
-    - Bind the update data to the `post` struct.
-    - Find the post by ID and update its fields.
-- `DeletePost`:
-    - Find the post by ID and delete it from the database.
-    - If not found, return a `404` status. 
-
-### Step 5: Implement the Page Controller
-
-- `page_controller.go`: repeat the CRUD implementation as outlined in `post_controller.go`.
-
-### Step 6: Implement the Media Controller
-- `media_controller.go`: repeat the CRUD implementation as outlined in `page_controller.go`.
-
-### Step 7: Implement the Routes
-File: `routes/routes.go`
-
-Task: Define the routes for the API using Gin and link them to the handlers.
-
-Instructions:
-
-- Add database middleware that: 
-    - Stores the db instance in the context using a `db` key
-    - Calls `Next()` to continue to the next handler
-- Create API version group that:
-    - Uses `router.Group()` to create a new route group
-    - Sets the group prefix to `/api/v1`
-    - Stores the group in a variable for adding routes
-- Within the api group, use `router.GET()`, `router.POST()`, `router.PUT()`, and `router.DELETE()` methods to define routes for pages, posts, and media.
-- Mount the routes under the `/api/v1` prefix.
-
-### Step 9: Write Unit Tests for Page Controller
-
-Files: `tests/controllers/page_controller_test.go`
-
-Task: Write unit tests for each CRUD operation in `page_controller.go`.
-
-Instructions:
-- Use `httptest` to simulate HTTP requests and `testify` for assertions.
-- Mock database calls to ensure tests are isolated from real data.
-
-Example: See `TestGetPages` function in `controllers/page_controller_test.go` for a complete implementation.
-
-### Step 10: Write Unit Tests for Post Controller
-Files: `tests/controllers/post_controller_test.go`  
-
-Task: Write unit tests for each CRUD operation in `post_controller.go`.
-
-Instructions:
-- Use `httptest` to simulate HTTP requests and `testify` for assertions.
-- Mock database calls to ensure tests are isolated from real data.
-
-#### Step 11: Write Unit Tests for Media Controller
-Files: `tests/controllers/media_controller_test.go`  
-
-Task: Write unit tests for each CRUD operation in `media_controller.go`.
-
-Instructions:
-- Use `httptest` to simulate HTTP requests and `testify` for assertions.
-- Mock database calls to ensure tests are isolated from real data.
-
-#### Step 12: Write Integration Tests
-
-Files: `tests/integration/main_test.go`, `post_test.go`, `media_test.go`
-
-Task: Write integration tests to validate the end-to-end functionality of each API endpoint.
-
-Instructions:
-- Implement the `setup()` and `cleanup()` functions to prepare the test environment and clean up after tests in `main_test.go`.
-- Implement the `"Get All Media"` test case in `media_test.go`.
-- Implement the `"Create Post with Media"` test case in `post_test.go`.
-- Implement the `"Get Posts with Filter"` test case in `post_test.go`.
-
-Guidelines:
-- Integration tests should use a test database to validate that CRUD operations affect data as expected.
-- Each test should cover full CRUD operations to ensure the endpoints interact with the database correctly.
-
+- Check the console output for error messages.
+- Ensure that all dependencies are installed (go mod download).
+- Verify that the code compiles without errors (go build).

@@ -1,1 +1,6 @@
--- TODO: Add up migration for media table
+-- TODO: Create media table
+-- - Add primary key id column as SERIAL
+-- - Add required url column to store file location/path
+-- - Add type column to identify media type (image, video, etc.)
+-- - Add timestamps for created_at and updated_at
+--   Note: timestamps should use timezone for global compatibility

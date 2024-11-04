@@ -1,1 +1,1 @@
--- TODO: Add down migration for pages table
+DROP TABLE IF EXISTS pages;
