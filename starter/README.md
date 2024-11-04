@@ -218,12 +218,14 @@ Prepare Migration Files:
 
 Ensure your migration SQL files are correctly set up in the ./migrations directory.
 Example migration files:
-`000001_create_pages_table.up.sql`
-`000001_create_pages_table.down.sql`
+- `000001_create_pages_table.up.sql`
+- `000001_create_pages_table.down.sql`
 
 Run Migrations:
 
-`migrate -database "postgres://your_db_user:your_db_password@localhost:5432/your_db_name?sslmode=disable" -path ./migrations up`
+```bash
+migrate -database "postgres://your_db_user:your_db_password@localhost:5432/your_db_name?sslmode=disable" -path ./migrations up
+```
 Replace `your_db_user`, `your_db_password`, and `your_db_name` with your database credentials.
 
 Verify the Migrations:
@@ -301,17 +303,24 @@ Instructions:
 
 Run the Application:
 
-` go run main.go `
+```bash
+go run main.go
+```
+
 Test Endpoints Using cURL or Postman:
 
 Example: Test the GetPosts endpoint.
 
-` curl -X GET http://localhost:8080/api/v1/posts `
+```bash
+curl -X GET http://localhost:8080/api/v1/posts 
+```
 Create a New Post:
 
-` curl -X POST http://localhost:8080/api/v1/posts \
+```bash
+curl -X POST http://localhost:8080/api/v1/posts \
   -H "Content-Type: application/json" \
-  -d '{"title": "First Post", "content": "This is the content of the first post.", "author": "Admin"}' `
+  -d '{"title": "First Post", "content": "This is the content of the first post.", "author": "Admin"}'
+```
 Verify Responses:
 
 - Ensure that the API responds with the correct status codes and data.
@@ -413,10 +422,12 @@ PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE cms_test;"
 
 #or using Makefile
 
-` make create-test-db `
+```bash
+make create-test-db
+```
 
 2. Configure environment (optional):
-```env
+```bash
 # .env.test
 TEST_DB_HOST=localhost
 TEST_DB_USER=postgres
@@ -429,14 +440,21 @@ Command:
 
 To run all tests, run the following command:
 
-`make test`
+```bash
+make test
+```
 
 To run only integration tests, run the following command:
 
-`make test-integration`
+```bash
+make test-integration
+```
+
 To run integration tests with database setup, run the following command:
 
-`make test-integration-full`
+```bash
+make test-integration-full
+```
 
 To run specific integration tests, run the following command:
 ```bash
