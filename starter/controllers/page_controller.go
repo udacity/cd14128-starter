@@ -1,13 +1,7 @@
 package controllers
 
 import (
-	"cms-backend/models"
-	"cms-backend/utils"
-	"net/http"
-	"strconv"
-
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
 // TODO: Import required packages:
@@ -20,44 +14,31 @@ import (
 
 // GetPages retrieves all pages
 func GetPages(c *gin.Context) {
-    // Get database instance from context
-    db := c.MustGet("db").(*gorm.DB)
-	// Declare pages variable
-    var pages []models.Page
+    // TODO: Get database instance from context
 
-    // TODO: Query all pages from database:
-    // if err := db.Find(&pages).Error; err != nil {
-    //     Handle error case here
-    // }
+    // TODO: Declare pages slice variable
 
-    // TODO: Return success response:
+    // TODO: Query all pages from database
+
+    // TODO: Handle potential database errors
+
+    // TODO: Return success response with pages
 }
 
 // GetPage retrieves a specific page by ID
 func GetPage(c *gin.Context) {
-	db := c.MustGet("db").(*gorm.DB)
-	
-	idStr := c.Param("id")
-	id, err := strconv.ParseUint(idStr, 10, 32)
-	if err != nil {
-		c.JSON(http.StatusBadRequest, utils.HTTPError{
-			Code:    http.StatusBadRequest,
-			Message: "Invalid ID format",
-		})
-		return
-	}
-
-	var page models.Page
-	if err := db.First(&page, uint(id)).Error; err != nil {
-		c.JSON(http.StatusNotFound, utils.HTTPError{
-			Code:    http.StatusNotFound,
-			Message: "Page not found",
-		})
-		return
-	}
-	c.JSON(http.StatusOK, page)
+    // TODO: Get database instance from context
+    
+    // TODO: Get ID parameter and convert to uint
+    
+    // TODO: Declare page variable
+    
+    // TODO: Query page from database
+    
+    // TODO: Handle potential database errors
+    
+    // TODO: Return success response with page
 }
-
 // CreatePage creates a new page
 func CreatePage(c *gin.Context) {
 	// TODO: Get database instance from context

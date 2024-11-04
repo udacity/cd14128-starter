@@ -381,10 +381,10 @@ Instructions:
 
 Example: See `models/media.go` for a complete implementation.
 
-### Step 2: Implement the GetPages Handler
-File: `controllers/page_controller.go`
+### Step 2: Implement the GetPost Handler
+File: `controllers/post_controller.go`
 
-Task: Complete the GetPages function to retrieve all pages from the database.
+Task: Complete the `GetPost` function to retrieve all posts from the database.
 
 Instructions:
 
@@ -392,37 +392,37 @@ Instructions:
 - If there’s an error, return a `500` status with an error message.
 - If successful, return a `200` status and the list of pages as JSON.
 
-Example: See `GetPage` function in `controllers/page_controller.go` for a complete implementation.
+Example: See `GetPost` function in `controllers/post_controller.go` for a complete implementation.
 
-### Step 3: Implement the CreatePage Handler
-File: `controllers/page_controller.go`
+### Step 3: Implement the CreatePost Handler
+File: `controllers/post_controller.go`
 
-Task: Complete the CreatePage function to create a new page.
+Task: Complete the CreatePost function to create a new post.
 
 Instructions:
 
 - Bind JSON data from the request to the page struct.
 - Validate required fields (Title and Content).
-- Insert the new page into the database.
-- Return a 201 status and the created page as JSON.
+- Insert the new post into the database.
+- Return a 201 status and the created post as JSON.
 
-### Step 4: Implement UpdatePage and DeletePage Handlers
-File: `controllers/page_controller.go`
+### Step 4: Implement UpdatePost and DeletePost Handlers
+File: `controllers/post_controller.go`
 
-Task: Implement `UpdatePage` and `DeletePage` functions.
+Task: Implement `UpdatePost` and `DeletePost` functions.
 
 Instructions:
 
 - `UpdatePage`:
-    - Bind the update data to the `page` struct.
-    - Find the page by ID and update its fields.
-- `DeletePage`:
-    - Find the page by ID and delete it from the database.
+    - Bind the update data to the `post` struct.
+    - Find the post by ID and update its fields.
+- `DeletePost`:
+    - Find the post by ID and delete it from the database.
     - If not found, return a `404` status. 
 
-### Step 5: Implement the Post Controller
+### Step 5: Implement the Page Controller
 
-- `post_controller.go`: repeat the CRUD implementation as outlined in `page_controller.go`.
+- `page_controller.go`: repeat the CRUD implementation as outlined in `post_controller.go`.
 
 ### Step 6: Implement the Media Controller
 - `media_controller.go`: repeat the CRUD implementation as outlined in `page_controller.go`.
