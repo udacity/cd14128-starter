@@ -11,8 +11,6 @@ import (
 )
 
 func GetMedia(c *gin.Context) {
-    db := c.MustGet("db").(*gorm.DB)
-    var media []models.Media
     // TODO: Implement logic to retrieve all media
 }
 
@@ -22,13 +20,10 @@ func GetMediaByID(c *gin.Context) {
 }
 
 func CreateMedia(c *gin.Context) {
-    db := c.MustGet("db").(*gorm.DB)
-    var media models.Media
     // TODO: Implement logic to create new media
 }
 
 func DeleteMedia(c *gin.Context) {
-    db := c.MustGet("db").(*gorm.DB)
     // TODO: Implement logic to delete media
 }
 

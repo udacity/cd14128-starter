@@ -1,12 +1,12 @@
 # CMS Backend
 
-This repository contains the starter code for a Content Management System (CMS) backend API built with Go (Golang), the Gin web framework, and GORM for ORM. This project is intended to help learners understand CRUD operations, database migrations, environment configuration, and testing through hands-on coding.
+This README guides you through setting up and completing a Content Management System (CMS) backend API built with Go (Golang), the Gin web framework, and GORM for OR and PostgreSQL. This project covers essential backend skills, including CRUD operations, database migrations, testing, and deploying environment-specific configurations.
 
 ## Project Objectives
 
 The objective of this project is to build a fully functional backend API with CRUD capabilities for managing pages, posts, and media content. Learners will:
 
-- Complete the CRUD handlers in the `Page` and `Post` controllers.
+- Complete the CRUD handlers in the `Page`, `Post`, and `Media` controllers.
 - Implement database operations using GORM.
 - Configure environment variables for different environments.
 - Add tests to verify functionality, including unit and integration tests.
@@ -365,3 +365,128 @@ Organizing tests by functionality ensures clarity and ease of maintenance. The f
 ```
 
 Each test suite within controllers/ and integration/ includes individual tests covering CRUD operations and validations, contributing to a well-tested and robust API backend.
+
+## Step-by-Step Implementation Guide
+Each section below provides guidance for implementing tasks related to CRUD functionality, models, controllers, routing, and testing.
+
+### Step 1: Define the Models
+Files: `models/page.go`, `models/post.go`, and `models/media.go`
+
+Task: Define data structures for `Page` and `Post`.
+
+Instructions:
+
+- Open each model file and define struct fields with appropriate GORM tags, as described in // TODO comments.
+- Ensure fields like `ID`, `Title`, `Content`, `Slug`, `CreatedAt`, and `UpdatedAt` are included in each model.
+
+Example: See `models/media.go` for a complete implementation.
+
+### Step 2: Implement the GetPages Handler
+File: `controllers/page_controller.go`
+
+Task: Complete the GetPages function to retrieve all pages from the database.
+
+Instructions:
+
+- Query the pages table to retrieve all records.
+- If there’s an error, return a `500` status with an error message.
+- If successful, return a `200` status and the list of pages as JSON.
+
+Example: See `GetPage` function in `controllers/page_controller.go` for a complete implementation.
+
+### Step 3: Implement the CreatePage Handler
+File: `controllers/page_controller.go`
+
+Task: Complete the CreatePage function to create a new page.
+
+Instructions:
+
+- Bind JSON data from the request to the page struct.
+- Validate required fields (Title and Content).
+- Insert the new page into the database.
+- Return a 201 status and the created page as JSON.
+
+### Step 4: Implement UpdatePage and DeletePage Handlers
+File: `controllers/page_controller.go`
+
+Task: Implement `UpdatePage` and `DeletePage` functions.
+
+Instructions:
+
+- `UpdatePage`:
+    - Bind the update data to the `page` struct.
+    - Find the page by ID and update its fields.
+- `DeletePage`:
+    - Find the page by ID and delete it from the database.
+    - If not found, return a `404` status. 
+
+### Step 5: Implement the Post Controller
+
+- `post_controller.go`: repeat the CRUD implementation as outlined in `page_controller.go`.
+
+### Step 6: Implement the Media Controller
+- `media_controller.go`: repeat the CRUD implementation as outlined in `page_controller.go`.
+
+### Step 7: Implement the Routes
+File: `routes/routes.go`
+
+Task: Define the routes for the API using Gin and link them to the handlers.
+
+Instructions:
+
+- Add database middleware that: 
+    - Stores the db instance in the context using a `db` key
+    - Calls `Next()` to continue to the next handler
+- Create API version group that:
+    - Uses `router.Group()` to create a new route group
+    - Sets the group prefix to `/api/v1`
+    - Stores the group in a variable for adding routes
+- Within the api group, use `router.GET()`, `router.POST()`, `router.PUT()`, and `router.DELETE()` methods to define routes for pages, posts, and media.
+- Mount the routes under the `/api/v1` prefix.
+
+### Step 9: Write Unit Tests for Page Controller
+
+Files: `tests/controllers/page_controller_test.go`
+
+Task: Write unit tests for each CRUD operation in `page_controller.go`.
+
+Instructions:
+- Use `httptest` to simulate HTTP requests and `testify` for assertions.
+- Mock database calls to ensure tests are isolated from real data.
+
+Example: See `TestGetPages` function in `controllers/page_controller_test.go` for a complete implementation.
+
+### Step 10: Write Unit Tests for Post Controller
+Files: `tests/controllers/post_controller_test.go`  
+
+Task: Write unit tests for each CRUD operation in `post_controller.go`.
+
+Instructions:
+- Use `httptest` to simulate HTTP requests and `testify` for assertions.
+- Mock database calls to ensure tests are isolated from real data.
+
+#### Step 11: Write Unit Tests for Media Controller
+Files: `tests/controllers/media_controller_test.go`  
+
+Task: Write unit tests for each CRUD operation in `media_controller.go`.
+
+Instructions:
+- Use `httptest` to simulate HTTP requests and `testify` for assertions.
+- Mock database calls to ensure tests are isolated from real data.
+
+#### Step 12: Write Integration Tests
+
+Files: `tests/integration/main_test.go`, `post_test.go`, `media_test.go`
+
+Task: Write integration tests to validate the end-to-end functionality of each API endpoint.
+
+Instructions:
+- Implement the `setup()` and `cleanup()` functions to prepare the test environment and clean up after tests in `main_test.go`.
+- Implement the `"Get All Media"` test case in `media_test.go`.
+- Implement the `"Create Post with Media"` test case in `post_test.go`.
+- Implement the `"Get Posts with Filter"` test case in `post_test.go`.
+
+Guidelines:
+- Integration tests should use a test database to validate that CRUD operations affect data as expected.
+- Each test should cover full CRUD operations to ensure the endpoints interact with the database correctly.
+

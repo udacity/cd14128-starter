@@ -4,8 +4,6 @@ import (
 	"testing"
 )
 
-
-
 func TestGetMedia(t *testing.T) {
 	//TODO: Add test for GetMedia
 }
