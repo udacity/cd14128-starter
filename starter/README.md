@@ -274,10 +274,10 @@ Instructions:
 
 ### Step 6: Implement the Page Controller
 
-- `page_controller.go`: repeat the CRUD implementation as outlined in `post_controller.go`.
+- `page_controller.go`: repeat the CRUD implementation as outlined in `page_controller.go`.
 
 ### Step 7: Implement the Media Controller
-- `media_controller.go`: repeat the CRUD implementation as outlined in `page_controller.go`.
+- `media_controller.go`: repeat the CRUD implementation as outlined in `media_controller.go`.
 
 ### Step 8: Implement the Routes
 File: `routes/routes.go`
