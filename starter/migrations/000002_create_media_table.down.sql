@@ -1,0 +1,1 @@
+-- TODO: Add down migration for media table

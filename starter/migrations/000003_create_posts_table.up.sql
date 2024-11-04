@@ -1,0 +1,1 @@
+-- TODO: Add up migration for posts table
