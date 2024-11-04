@@ -468,29 +468,38 @@ This command runs all integration tests, which test your application end-to-end.
 Ensure that the test database is clean before running tests to avoid data contamination.
 Use `make create-test-db` to set up the test database if needed.
 
-### Troubleshooting
+## Troubleshooting
+
 If you encounter issues while setting up or running the application, consider the following tips:
 
-**Cannot Connect to Database:**
+### Cannot Connect to Database
 
 - Ensure that PostgreSQL is running.
-- Verify that your database credentials in the .env file are correct.
+- Verify that your database credentials in the `.env` file are correct.
 - Check that the database exists and that the user has appropriate permissions.
 
-**Migrations Fail:**
+### Migrations Fail
 
 - Ensure that the migration files are correctly formatted.
-- Check that you have the correct version of golang-migrate installed.
+- Check that you have the correct version of `golang-migrate` installed.
 - Review error messages for specific details.
 
-**Tests Fail:**
+### Tests Fail
 
 - Ensure that your test database is properly set up.
 - Check for issues in your test setup code.
 - Review error messages and stack traces to identify the problem.
 
-**Server Crashes or Does Not Start:**
+### Server Crashes or Does Not Start
 
 - Check the console output for error messages.
-- Ensure that all dependencies are installed (go mod download).
-- Verify that the code compiles without errors (go build).
+- **Dependency Issues:**
+  - Run `go mod download` to ensure all dependencies specified in your `go.mod` file are downloaded.
+  - If you still face issues, run `go mod tidy` to synchronize your modules:
+    ```bash
+    go mod tidy
+    ```
+    - This command adds missing module requirements and removes unnecessary ones.
+- Verify that the code compiles without errors:
+  ```bash
+  go build
