@@ -244,7 +244,7 @@ Instructions:
 - If there’s an error, return a `500` status with an error message.
 - If successful, return a `200` status and the list of pages as JSON.
 
-Example: See `GetPost` function in `controllers/post_controller.go` for a complete implementation.
+Example: See `GetPosts` function in `controllers/post_controller.go` for a complete implementation.
 
 ### Step 4: Implement the CreatePost Handler
 File: `controllers/post_controller.go`
