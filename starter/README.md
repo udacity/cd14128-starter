@@ -117,42 +117,6 @@ pgAdmin 4 is a web-based GUI tool that simplifies database management. Follow th
 `GRANT ALL PRIVILEGES ON DATABASE your_db_name TO your_db_user;`
 
 
-
-### Integration Testing
-
-#### Overview
-Integration tests verify the functionality of the API as a whole, including interactions between components and the database.
-
-#### Prerequisites
-- Go 1.19 or higher
-- PostgreSQL 12 or higher
-- Access to create/modify databases
-
-#### Setup
-
-To perform integration testing, create a separate test database and update the .env.test file with appropriate credentials.
-
-1. Create test database:
-```bash
-# Using psql
-PGPASSWORD=postgres psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS cms_test;"
-PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE cms_test;"
-```
-
-#or using Makefile
-
-` make create-test-db `
-
-2. Configure environment (optional):
-```env
-# .env.test
-TEST_DB_HOST=localhost
-TEST_DB_USER=postgres
-TEST_DB_PASSWORD=postgres
-TEST_DB_NAME=cms_test
-TEST_DB_PORT=5432
-```
-
 ## Step-by-Step Implementation Guide
 In the following step-by-step guide, we'll walk you through building your CMS backend. You'll learn how to define your models, create database migrations, implement CRUD operations, set up routing, and write tests.
 
@@ -422,6 +386,29 @@ Prerequisites:
 
 - Set up a test database (e.g., cms_test).
 - Update your .env.test file with test database credentials.
+
+To perform integration testing, create a separate test database and update the `.env.test` file with appropriate credentials.
+
+1. Create test database:
+```bash
+# Using psql
+PGPASSWORD=postgres psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS cms_test;"
+PGPASSWORD=postgres psql -h localhost -U postgres -c "CREATE DATABASE cms_test;"
+```
+
+#or using Makefile
+
+` make create-test-db `
+
+2. Configure environment (optional):
+```env
+# .env.test
+TEST_DB_HOST=localhost
+TEST_DB_USER=postgres
+TEST_DB_PASSWORD=postgres
+TEST_DB_NAME=cms_test
+TEST_DB_PORT=5432
+```
 
 Command:
 
