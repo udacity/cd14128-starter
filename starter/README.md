@@ -196,6 +196,10 @@ Option 2: Using golang-migrate (Production Environment)
 
 For a more controlled migration process, especially in production environments (ENV=production), use golang-migrate to apply migrations from SQL files.
 
+Option 2: Using golang-migrate (Production Environment)
+
+For a more controlled migration process, especially in production environments (ENV=production), use golang-migrate to apply migrations from SQL files.
+
 1. Install golang-migrate:
 
 If you haven't installed it yet, follow the installation instructions from the golang-migrate GitHub repository.
@@ -203,14 +207,14 @@ Prepare Migration Files:
 
 Ensure your migration SQL files are correctly set up in the ./migrations directory.
 Example migration files:
-000001_create_pages_table.up.sql
-000001_create_pages_table.down.sql
+`000001_create_pages_table.up.sql`
+`000001_create_pages_table.down.sql`
+
 Run Migrations:
 
-bash
-Copy code
-migrate -database "postgres://your_db_user:your_db_password@localhost:5432/your_db_name?sslmode=disable" -path ./migrations up
-Replace your_db_user, your_db_password, and your_db_name with your database credentials.
+`migrate -database "postgres://your_db_user:your_db_password@localhost:5432/your_db_name?sslmode=disable" -path ./migrations up`
+Replace `your_db_user`, `your_db_password`, and `your_db_name` with your database credentials.
+
 Verify the Migrations:
 
 Use a PostgreSQL client or GUI tool to confirm that the tables have been created according to your migration files.
