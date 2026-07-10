@@ -57,7 +57,12 @@ func main() {
 	routes.InitializeRoutes(router, db)
 
 	// Run the server
-	if err := router.Run(":8080"); err != nil {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	if err := router.Run(":" + port); err != nil {
 		log.Fatalf("Failed to run server: %v", err)
 	}
 }

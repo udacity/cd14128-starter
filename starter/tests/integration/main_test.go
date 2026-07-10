@@ -29,60 +29,63 @@ Key Components:
 
 func TestMain(m *testing.M) {
 	//TODO: Implement TestMain
-    // STEP 1: Environment Setup
-    // - Call setup() function
-    
-    // STEP 2: Run Tests
-    // - Execute all integration tests
-    
-    // STEP 3: Cleanup
-    // - Call cleanup() function
-    // - Exit with test result code
+	// STEP 1: Environment Setup
+	// - Call setup() function
+
+	// STEP 2: Run Tests
+	// - Execute all integration tests
+
+	// STEP 3: Cleanup
+	// - Call cleanup() function
+	// - Exit with test result code
 }
 
 func setup() {
 	//TODO: Implement setup
-    // STEP 1: Configure Gin
-    // - Set Gin to test mode for integration testing
-    
-    // STEP 2: Database Connection
-    // - Define test database connection string
-    // - Connect to test database using GORM
-    // - Store connection in testDB variable
-    // - Handle connection errors
-    
-    // STEP 3: Schema Migration
-    // - Migrate all model schemas:
-    //   * Media
-    //   * Page
-    //   * Post
-    //   * Any join tables
-    
-    // STEP 4: Router Setup
-    // - Initialize Gin router
-    // - Set up routes with test database
+	// STEP 1: Configure Gin
+	// - Set Gin to test mode for integration testing
+
+	// STEP 2: Database Connection
+	// - Load ../../.env.test with godotenv.Load; ignore the error if it is absent
+	// - Read TEST_DB_HOST, TEST_DB_USER, TEST_DB_PASSWORD, TEST_DB_NAME, and TEST_DB_PORT
+	// - Fall back to localhost/postgres/postgres/cms_test/5432 for unset variables
+	// - Define test database connection string from those values
+	// - Connect to test database using GORM
+	// - Store connection in testDB variable
+	// - Handle connection errors
+
+	// STEP 3: Schema Migration
+	// - Migrate all model schemas:
+	//   * Media
+	//   * Page
+	//   * Post
+	//   * Any join tables
+
+	// STEP 4: Router Setup
+	// - Initialize Gin router
+	// - Set up routes with test database
 }
 
 func cleanup() {
 	//TODO: Implement cleanup
-    // STEP 1: Database Cleanup
-    // - Get underlying SQL database
-    // - Drop all tables in correct order:
-    //   1. Junction tables (post_media)
-    //   2. Main tables (posts, media, pages)
-    
-    // STEP 2: Connection Cleanup
-    // - Close database connection
-    // - Handle any cleanup errors
+	// STEP 1: Database Cleanup
+	// - Get underlying SQL database
+	// - Drop all tables in correct order:
+	//   1. Junction tables (post_media)
+	//   2. Main tables (posts, media, pages)
+
+	// STEP 2: Connection Cleanup
+	// - Close database connection
+	// - Handle any cleanup errors
 }
 
 func clearTables() {
 	//TODO: Implement clearTables
-    // STEP 1: Data Cleanup
-    // - Delete all data from tables in correct order:
-    //   1. Junction tables first
-    //   2. Main tables next
-    // - Maintain referential integrity
+	// STEP 1: Data Cleanup
+	// - Delete all data from tables in correct order:
+	//   1. Junction tables first
+	//   2. Main tables next
+	// - Maintain referential integrity
 }
 
 /*

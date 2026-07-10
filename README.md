@@ -30,7 +30,7 @@ Before you begin, ensure you have the following installed:
 - [Go 1.16 or higher](https://go.dev/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Git](https://git-scm.com/)
-- [golang-migrate](https://github.com/golang-migrate)
+- [golang-migrate](https://github.com/golang-migrate) (Optional, for production-style migrations)
 - [pgAdmin 4](https://www.pgadmin.org/download/) (Optional)
 
 ### Installation steps
@@ -38,8 +38,8 @@ Before you begin, ensure you have the following installed:
 1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/udacity/backend-dev-C1-starter.git
-    cd project/solution
+    git clone https://github.com/udacity/cd14128-starter.git
+    cd cd14128-starter/starter
     ```
 2. **Install Go dependencies** 
 
@@ -55,15 +55,16 @@ Before you begin, ensure you have the following installed:
     cp .env.example .env
     ```
 
-    Open the `.env` file and replace the placeholder values with your actual database credentials:
+    The provided defaults match the Udacity workspace. If you are running locally, update these values as needed:
 
     ```bash
     DB_HOST=localhost
     DB_PORT=5432
-    DB_USER=your_db_user
-    DB_PASSWORD=your_db_password
-    DB_NAME=your_db_name
+    DB_USER=postgres
+    DB_PASSWORD=postgres
+    DB_NAME=cms
     ENV=development
+    PORT=3000
     ```
 
     Note: Ensure that the .env file is included in your .gitignore to prevent sensitive information from being committed to version control. Add `.env` to `.gitignore`.
@@ -309,15 +310,17 @@ go run main.go
 
 Test Endpoints Using cURL or Postman:
 
+The server listens on `PORT`. The Udacity workspace uses `3000`; if `PORT` is unset locally, the application defaults to `8080`.
+
 Example: Test the GetPosts endpoint.
 
 ```bash
-curl -X GET http://localhost:8080/api/v1/posts 
+curl -X GET http://localhost:3000/api/v1/posts
 ```
 Create a New Post:
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/posts \
+curl -X POST http://localhost:3000/api/v1/posts \
   -H "Content-Type: application/json" \
   -d '{"title": "First Post", "content": "This is the content of the first post.", "author": "Admin"}'
 ```
