@@ -15,7 +15,7 @@ import (
 // @title CMS Backend API
 // @version 1.0
 // @description This is a backend API for a Content Management System (CMS).
-// @host localhost:8080
+// @host localhost:3000
 // @BasePath /api/v1
 
 func main() {
@@ -33,10 +33,7 @@ func main() {
 	defer sqlDB.Close()
 
 	// Get the environment variable
-	env := os.Getenv("ENV")
-	if env == "" {
-		env = "development" // default to development if ENV is not set
-	}
+	env := getEnv("ENV", "development")
 
 	// Conditionally run AutoMigrate in development environment
 	if env == "development" {
@@ -57,12 +54,16 @@ func main() {
 	routes.InitializeRoutes(router, db)
 
 	// Run the server
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
+	port := getEnv("PORT", "3000")
 
 	if err := router.Run(":" + port); err != nil {
 		log.Fatalf("Failed to run server: %v", err)
 	}
+}
+
+func getEnv(key, fallback string) string {
+	if value := os.Getenv(key); value != "" {
+		return value
+	}
+	return fallback
 }

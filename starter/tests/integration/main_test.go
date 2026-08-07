@@ -1,6 +1,10 @@
 package integration
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/gin-gonic/gin"
+)
 
 // TODO: Import required packages for:
 // - Database (gorm, postgres driver)
@@ -13,6 +17,10 @@ import "testing"
 // TODO: Define package-level variables for:
 // - Test database connection
 // - Gin router instance
+
+// router is declared so the provided integration-test scaffolding compiles.
+// TODO: Initialize it in setup before enabling the integration tests.
+var router *gin.Engine
 
 /*
 INTEGRATION TEST SETUP GUIDE
@@ -48,7 +56,7 @@ func setup() {
 	// STEP 2: Database Connection
 	// - Load ../../.env.test with godotenv.Load; ignore the error if it is absent
 	// - Read TEST_DB_HOST, TEST_DB_USER, TEST_DB_PASSWORD, TEST_DB_NAME, and TEST_DB_PORT
-	// - Fall back to localhost/postgres/postgres/cms_test/5432 for unset variables
+	// - Fall back to 127.0.0.1/postgres/postgres/cms_test/5432 for unset variables
 	// - Define test database connection string from those values
 	// - Connect to test database using GORM
 	// - Store connection in testDB variable

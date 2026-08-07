@@ -27,7 +27,7 @@ The final deliverable is a backend API with comprehensive test coverage that fol
 
 Before you begin, ensure you have the following installed:
 
-- [Go 1.16 or higher](https://go.dev/)
+- [Go 1.20 or higher](https://go.dev/)
 - [PostgreSQL](https://www.postgresql.org/)
 - [Git](https://git-scm.com/)
 - [golang-migrate](https://github.com/golang-migrate) (Optional, for production-style migrations)
@@ -38,8 +38,8 @@ Before you begin, ensure you have the following installed:
 1. **Clone the repository**
 
     ```bash
-    git clone https://github.com/udacity/cd14128-starter.git
-    cd cd14128-starter/starter
+    git clone https://github.com/udacity/backend-dev-C1-starter.git
+    cd backend-dev-C1-starter/starter
     ```
 2. **Install Go dependencies** 
 
@@ -58,7 +58,7 @@ Before you begin, ensure you have the following installed:
     The provided defaults match the Udacity workspace. If you are running locally, update these values as needed:
 
     ```bash
-    DB_HOST=localhost
+    DB_HOST=127.0.0.1
     DB_PORT=5432
     DB_USER=postgres
     DB_PASSWORD=postgres
@@ -225,7 +225,7 @@ Example migration files:
 Run Migrations:
 
 ```bash
-migrate -database "postgres://your_db_user:your_db_password@localhost:5432/your_db_name?sslmode=disable" -path ./migrations up
+migrate -database "postgres://your_db_user:your_db_password@127.0.0.1:5432/your_db_name?sslmode=disable" -path ./migrations up
 ```
 Replace `your_db_user`, `your_db_password`, and `your_db_name` with your database credentials.
 
@@ -310,7 +310,7 @@ go run main.go
 
 Test Endpoints Using cURL or Postman:
 
-The server listens on `PORT`. The Udacity workspace uses `3000`; if `PORT` is unset locally, the application defaults to `8080`.
+The server listens on `PORT`. The Udacity workspace uses `3000`, which is also the application default when `PORT` is unset.
 
 Example: Test the GetPosts endpoint.
 
@@ -432,7 +432,7 @@ make create-test-db
 2. Configure environment (optional):
 ```bash
 # .env.test
-TEST_DB_HOST=localhost
+TEST_DB_HOST=127.0.0.1
 TEST_DB_USER=postgres
 TEST_DB_PASSWORD=postgres
 TEST_DB_NAME=cms_test
